@@ -1,0 +1,22 @@
+<!DOCTYPE NETSCAPE-Bookmark-file-1>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<TITLE>Bookmarks</TITLE>
+<H1>Bookmarks</H1>
+<DL><p>
+{%- macro render_folder(folder_name, bookmarks) %}
+  <DT><H3 ADD_DATE="1677107386" LAST_MODIFIED="1677107386">{{ folder_name }}</H3>
+  <DL><p>
+    {%- for key, value in bookmarks.items() %}
+      {%- if key == 'bookmarks' %}
+        {%- for bookmark in value %}
+          <DT><A HREF="{{ bookmark.url }}" ADD_DATE="1677107386" LAST_MODIFIED="1677107386">{{ bookmark.name }}</A>
+        {%- endfor %}
+      {%- else %}
+        {{ render_folder(key, value) }}
+      {%- endif %}
+    {%- endfor %}
+  </DL><p>
+{%- endmacro %}
+
+{{ render_folder('Bookmarks bar', bookmarks) }}
+</DL><p>
