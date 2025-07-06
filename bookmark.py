@@ -25,21 +25,19 @@ def create_chrome_bookmarks(csv_file, template_file, output_file):
             # print(row)
             path = row[0].strip("/").split("/")
             name = row[1]
-            url = f"www.test.com/{row[0]}/{name}"
-
+            title = row[2]
+            url = f"{name}"
             current_level = bookmarks
             for folder in path:
                 current_level = current_level.setdefault(folder, {})
             # Use a list to store multiple bookmarks at the same path
             if "bookmarks" not in current_level:
                 current_level["bookmarks"] = []
-            current_level["bookmarks"].append({"name": name, "url": url})
+            current_level["Bookmarks Bar"].append({"name": name, "url": url, "title": title})
 
     # Render the template
     with open(output_file, "w") as f:
         f.write(template.render(bookmarks=bookmarks))
-
-
 if __name__ == "__main__":
     csv_file = "input.csv"
     template_file = "bookmarks_template.html"  # Replace with your template file
